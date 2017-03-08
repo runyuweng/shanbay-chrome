@@ -1,16 +1,22 @@
 {
   "manifest_version": 2,
-
-  "name": "Shanbei",
-  "description": "This is a chrome extension for shanbei",
+  "name": "Shanbay",
+  "description": "This is a chrome extension for shanbay",
   "version": "1.0",
-
+  "background": { "scripts": ["background.js"] },
+  "permissions": ["tabs"],
+  "content_scripts": [
+  {
+    "matches": [
+      "http://*/*",
+      "https://*/*",
+      "file:///*/*"
+    ],
+    "js": ["jquery-3.1.1.min.js"]
+  }
+],
   "browser_action": {
-    "default_icon": "shanbay_favicon.png",
+    "default_icon": "./img/shanbay_favicon.png",
     "default_popup": "popup.html"
-  },
-  "permissions": [
-    "activeTab",
-    "https://ajax.googleapis.com/"
-  ]
+  }
 }

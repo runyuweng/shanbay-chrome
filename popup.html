@@ -12,12 +12,15 @@
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
       }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
+      .btn_group button{
+        width: 120px;
+        color: #fff;
+        padding: 5px 20px;
+        margin: 5px;
+        border-radius: 2px;
+        background: #29c192;
+        border: none;
+        outline: none;
       }
     </style>
 
@@ -29,9 +32,8 @@
      -->
     <script src="popup.js"></script>
   </head>
-  <body style="width:150px;height:150px">
-    <div id="status"></div>
-    <div>
+  <body>
+    <div class="btn_group">
       <button>过滤其他内容</button>
       <button>文章自动分页</button>
     </div>
