@@ -22,6 +22,7 @@ $('footer').hide();
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+    if(request.type === 'filter'){}
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
