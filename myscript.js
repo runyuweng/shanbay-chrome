@@ -9,3 +9,22 @@ $('.rich-link').hide();
 $('.content-footer').hide();
 $('.submeta').hide();
 $('footer').hide();
+// $('body').click(function(){
+//   chrome.extension.sendRequest({greeting: "hello"}, function(response) {
+//     console.log(response);
+//   });
+// })
+// chrome.extension.onRequest.addListener(
+//   function(request, sender, sendResponse) {
+//     console.log('this is myscript,get the message');
+//   }
+// );
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting == "hello")
+      sendResponse({farewell: "goodbye"});
+  });

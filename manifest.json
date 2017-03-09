@@ -7,7 +7,11 @@
   "permissions": ["tabs"],
   "content_scripts": [
   {
-    "matches": ["https://www.theguardian.com/*"],
+    "matches": [
+      "http://*/*",
+      "https://*/*",
+      "file:///*/*"
+    ],
     "js": ["jquery-3.1.1.min.js","myscript.js"]
   }
 ],
