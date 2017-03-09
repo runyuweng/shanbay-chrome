@@ -1,9 +1,4 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
@@ -13,29 +8,28 @@
         font-size: 100%;
       }
       .btn_group button{
+        cursor: pointer;
         width: 120px;
         color: #fff;
         padding: 5px 20px;
         margin: 5px;
         border-radius: 2px;
-        background: #29c192;
+        background: #8FD0F3;
         border: none;
         outline: none;
+        transition: background 1s;
+      }
+      .btn_group button:hover{
+        background: #45A5D8;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
+    <script src="jquery-3.1.1.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
     <div class="btn_group">
-      <button>过滤其他内容</button>
-      <button>文章自动分页</button>
+      <button id="btn1">过滤其他内容</button>
+      <button id="btn2">文章自动分页</button>
     </div>
     <img id="image-result" hidden>
   </body>

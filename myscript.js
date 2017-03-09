@@ -1,0 +1,11 @@
+$('#bannerandheader').hide();
+$('#google_image_div').hide();
+$('.js-components-container').hide();
+$('.content__meta-container.js-content-meta.js-football-meta.u-cf').hide();
+$('.element.element-rich-link.element--thumbnail.element-rich-link--upgraded').hide();
+$('.content__labels.content__labels--not-immersive').hide();
+$('.content__secondary-column.js-secondary-column').hide();
+$('.rich-link').hide();
+$('.content-footer').hide();
+$('.submeta').hide();
+$('footer').hide();

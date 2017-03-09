@@ -1,6 +1,7 @@
-
-function test(){
-  console.log(111);
-  console.log($('#resultStats').css());
-}
-chrome.tabs.onUpdated.addListener(test);
+chrome.tabs.onCreated.addListener(function(tab) {
+  console.log('tabs.onCreated --'
+              + ' tab.window: ' + tab.windowId
+              + ' tab.id: '    + tab.id
+              + ' tab.index: '  + tab.index
+              + ' tab.url: '    + tab.url);
+});
