@@ -1,15 +1,28 @@
 // 选中翻译
 $('body').mouseup(function(e){
-  var selObj = window.getSelection();
-  // console.log(selObj.toString());
-  // console.log(selObj);
+  $('.selection-sharing.selection-sharing--active').hide();
+  var selected = window.getSelection();
+  console.log('focusNode',selected.focusNode);
+  console.log('focusNode',selected.focusNode);
+  let range = document.createRange();
+  let newNode = document.createElement("div");
+  newNode.appendChild(document.createTextNode("New Node Inserted Here"));
+  range.insertNode(newNode);
+  selected.addRange(range);
   let current_x = e.clientX+document.body.scrollLeft+document.documentElement.scrollLeft,
       current_y = e.clientY+document.body.scrollTop+document.documentElement.scrollTop;
-  if(selObj.toString()){
+  //上下左右
+  let pos = [
+    'top:'+current_y+'px;left:'+current_x+'px',
+    'top:'+current_y+'px;left:'+current_x+'px',
+    'top:'+current_y+'px;left:'+current_x+'px',
+    'top:'+current_y+'px;left:'+current_x+'px',
+  ];
+  if(selected.toString()){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     myHeaders.append("Authorization", "Bearer TOKEN");
-    fetch("https://api.shanbay.com/bdc/search/?word="+selObj.toString(),
+    fetch("https://api.shanbay.com/bdc/search/?word="+selected.toString(),
       {
         method: "GET"
       },
@@ -22,13 +35,11 @@ $('body').mouseup(function(e){
       function(data){
         if(data.msg == "SUCCESS"){
           console.log('success');
-          console.log(current_x);
-          console.log(current_y);
-          let tips = '<div id="tip" style="z-index:999;background:#fff;border:1px solid #666;border-radius:5px;position:absolute;top:'+current_y+'px;left:'+current_x+'px">'+data.data.definition+'<div>';
+          let tips = '<div id="tip" style="padding:0 8px;background:#000;opacity:0.8;z-index:999;color:#fff;border-radius:5px;position:absolute;'+pos[0]+'">'+data.data.definition+'<div>';
           console.log(tips);
           $('body').append(tips);
         }else{
-          let tips = '<div id="tip" style="z-index:999;background:#fff;border:1px solid #666;border-radius:5px;position:absolute;top:'+current_y+'px;left:'+current_x+'px">未查询到相关单词<div>';
+          let tips = '<div id="tip" style="padding:0 8px;background:#000;opacity:0.8;z-index:999;color:#fff;border-radius:5px;position:absolute;'+pos[0]+'">未查询到相关单词<div>';
           $('body').append(tips);
 
         }
