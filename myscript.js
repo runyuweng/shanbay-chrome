@@ -1,4 +1,5 @@
 // 选中翻译
+// $('head').append('<meta http-equiv="Content-Security-Policy" content="media-src:*;">')
 $('body').mouseup(function(e){
   $('.selection-sharing.selection-sharing--active').hide();
   var selected = window.getSelection();
