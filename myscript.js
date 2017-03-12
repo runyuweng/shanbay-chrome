@@ -2,13 +2,6 @@
 $('body').mouseup(function(e){
   $('.selection-sharing.selection-sharing--active').hide();
   var selected = window.getSelection();
-  console.log('focusNode',selected.focusNode);
-  console.log('focusNode',selected.focusNode);
-  let range = document.createRange();
-  let newNode = document.createElement("div");
-  newNode.appendChild(document.createTextNode("New Node Inserted Here"));
-  range.insertNode(newNode);
-  selected.addRange(range);
   let current_x = e.clientX+document.body.scrollLeft+document.documentElement.scrollLeft,
       current_y = e.clientY+document.body.scrollTop+document.documentElement.scrollTop;
   //上下左右
@@ -18,6 +11,7 @@ $('body').mouseup(function(e){
     'top:'+current_y+'px;left:'+current_x+'px',
     'top:'+current_y+'px;left:'+current_x+'px',
   ];
+  //获取到选中内容并发送请求
   if(selected.toString()){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
@@ -47,14 +41,22 @@ $('body').mouseup(function(e){
     )
   }
 })
+//点击页面其他位置将弹窗隐藏
 $('body').click(function(e){
   $('#tip').remove();
 })
+
+
+
+
+
+
 
   // 监听popup点击事件
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(request);
+    //如果接收到打开过滤及执行以下操作
     if(request.type === 'filter' && request.text === true){
       $('#bannerandheader').hide();
       $('#google_image_div').hide();
@@ -68,8 +70,8 @@ chrome.runtime.onMessage.addListener(
       $('.content-footer').hide();
       $('.submeta').hide();
       $('footer').hide();
-      console.log(request.text);
       sendResponse({type: "success"});
+      //如果接收到关闭过滤执行接下来的操作
     }else if(request.type === 'filter' && request.text === false){
       $('#bannerandheader').show();
       $('#google_image_div').show();
@@ -80,22 +82,29 @@ chrome.runtime.onMessage.addListener(
       $('.content-footer').show();
       $('.submeta').show();
       $('footer').show();
-      console.log(request.text);
       sendResponse({message: "filter success"});
-    }else if (request.type === 'paging' && request.text === true){
       //添加分页
-      let num = [1,2,3,4],
+    }else if (request.type === 'paging' && request.text === true){
+      //分几页
+      $('#article').css('height',($(window).height()-60));
+      $('#article').css('overflow','hidden');
+      let page = (Math.ceil($(document).height()/($(window).height()-60))),
+          num = [],
           pagingList,
           pagingUl;
-
+      for(let i=0;i<page;i++){
+        num.push(i+1);
+      }
       pagingList = String(num.map(function(value){
-        return '<li key='+value+' style="float:left;text-decoration:none;margin:10px;curosr:pointer;">'+value+'</li>'
+        return '<li key='+value+' style="border:1px solid #333;color:#333;border-radius:5px;padding:5px 10px;float:left;margin:10px;cursor:pointer;">'+value+'</li>'
       })).replace(/,/g,'');
-      pagingUl = '<div class="pagingList" style="display:flex;justify-content:center;align-items:center;"><ul>'+pagingList+'</ul></div>';
+      pagingUl = '<div class="pagingList" style="display:flex;justify-content:center;align-items:center;"><ul style="list-style-type:none;margin:0;">'+pagingList+'</ul></div>';
+      //为pagingList添加点击事件
+      $('.l-side-margins').append(pagingUl);
 
-      console.log(String(pagingList).replace(/,/g,''));
-      $('.content__article-body.from-content-api.js-article__body').append(pagingUl);
-
+      $('.pagingList li').click(function(){
+        console.log(this.attr('key'));
+      })
       sendResponse({message: "paging success"});
     }
   }
