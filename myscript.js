@@ -86,9 +86,12 @@ chrome.runtime.onMessage.addListener(
       //添加分页
     }else if (request.type === 'paging' && request.text === true){
       //分几页
-      $('#article').css('height',($(window).height()-60));
+
+      let winHeight = $(window).height()-100,
+          totalHeight = $('#article').height();
+      $('#article').css('height',winHeight);
       $('#article').css('overflow','hidden');
-      let page = (Math.ceil($(document).height()/($(window).height()-60))),
+      let page = (Math.ceil(totalHeight/winHeight)),
           num = [],
           pagingList,
           pagingUl;
@@ -102,10 +105,18 @@ chrome.runtime.onMessage.addListener(
       //为pagingList添加点击事件
       $('.l-side-margins').append(pagingUl);
 
-      $('.pagingList li').click(function(){
-        console.log(this.attr('key'));
+      $('.pagingList li').click(function(e){
+        e.stopPropagation();
+        $("[itemprop='publisher']").css('margin-top',-winHeight*(this.innerHTML-1));
+        console.log(-(winHeight*(this.innerHTML-1)));
+        console.log(this.innerHTML);
       })
       sendResponse({message: "paging success"});
+    }else if (request.type === 'paging' && request.text === false){
+      $('#article').css('height','auto');
+      $('#article').css('overflow','visible');
+      $('.pagingList').remove();
+
     }
   }
 );
