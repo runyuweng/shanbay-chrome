@@ -39,20 +39,22 @@ $('body').mouseup(function(e){
 
           $('#tip').click(function(e){
             e.stopPropagation();
-            console.log(222);
           })
           $('#tip #voice').click(function(e){
-            var audio = document.createElement('audio');
-            var source = document.createElement('source');
-            source.type = "audio/mpeg";
-            source.type = "audio/mpeg";
-            source.src = data.data.audio;
-            source.autoplay = "autoplay";
-            source.controls = "controls";
-            audio.appendChild(source);
-            audio.play();
-            e.stopPropagation();
+            // var audio = document.createElement('audio');
+            // var source = document.createElement('source');
+            // source.type = "audio/mpeg";
+            // source.type = "audio/mpeg";
+            // source.src = data.data.audio;
+            // source.autoplay = "autoplay";
+            // source.controls = "controls";
+            // audio.appendChild(source);
+            // audio.play();
+            // e.stopPropagation();
             console.log(111);
+            chrome.runtime.sendMessage({type: "voice",text:data.data.audio}, function(response) {
+              console.log(response);
+            });
           })
         }else{
           hasSelected = true;

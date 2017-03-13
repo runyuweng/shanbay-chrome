@@ -7,12 +7,10 @@ $(document).ready(function(){
     if(filter){
       $("#btn1").text("已过滤");
       chrome.extension.sendRequest({type: "filter",text:true}, function(response) {
-        console.log(response);
       });
     }else{
       $("#btn1").text("过滤其他内容");
       chrome.extension.sendRequest({type: "filter",text:false}, function(response) {
-        console.log(response);
       });
     }
   });
@@ -22,12 +20,10 @@ $(document).ready(function(){
     if(paging){
       $("#btn2").text("已分页");
       chrome.extension.sendRequest({type: "paging",text:true}, function(response) {
-        console.log(response);
       });
     }else{
       $("#btn2").text("文章自动分页");
       chrome.extension.sendRequest({type: "paging",text:false}, function(response) {
-        console.log(response);
       });
     }
   });
