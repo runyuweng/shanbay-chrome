@@ -13,4 +13,4 @@ The third feature is available on all sites.
 - git clone to the local;
 - open chrome and enter the extension page;
 - click to load the extracted extensions and find the cloned file;
-- then you use it 😊.
+- then you can use it 😊.

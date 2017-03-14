@@ -5,32 +5,50 @@
     <style>
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+        font-size: 10px;
+        padding: 0 20px;
+        width: 160px;
       }
-      .btn_group button{
+      ul{
+        padding: 0;
+        list-style: none;
+      }
+      li{
         cursor: pointer;
-        width: 120px;
-        color: #fff;
-        padding: 5px 20px;
-        margin: 5px;
-        border-radius: 2px;
-        background: #77CEC5;
-        border: none;
-        outline: none;
-        transition: background .5s;
+        color: #2dd1ac;
+        padding: 10px 0;
+        border-top: 1px solid #e3e3e3;
       }
-      .btn_group button:hover{
-        background: #2DA38C;
+      li:hover{
+        text-decoration:underline;
+      }
+      img{
+        width: 12px;
+        height: 12px;
+        vertical-align: middle;
+        margin-right: 20px;
+      }
+      .title{
+        color: #888;
+        padding: 20px 0;
+        margin: 0;
+        text-align: center;
       }
     </style>
     <script src="jquery-3.1.1.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
-    <div class="btn_group">
-      <button id="btn1">过滤其他内容</button>
-      <button id="btn2">文章自动分页</button>
-    </div>
-    <img id="image-result" hidden>
+    <p class="title">扇贝欢迎您</p>
+    <ul>
+      <li id="filter">
+        <img src="./img/filter.png">
+        <span>过滤其他内容</span>
+      </li>
+      <li id="page">
+        <img src="./img/page.png">
+        <span>文章自动分页</span>
+      </li>
+    </ul>
   </body>
 </html>
